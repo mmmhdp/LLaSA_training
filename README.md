@@ -1,5 +1,4 @@
 # LLaSA_training
-ALL MY ADJUSTMENTS ON THE MULTIGPU BRANCH! 
 LLaSA: Scaling Train-time and Test-time Compute for LLaMA-based Speech Synthesis (Comming Soon!)
 
 ## Training
