@@ -4,3 +4,7 @@ wandb
 datasets
 accelerate>=0.26.0
 deepspeed
+torchaudio
+xcodec2==0.1.3
+bitsandbytes
+liger-kernel

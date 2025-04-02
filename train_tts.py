@@ -309,7 +309,7 @@ def main():
             padding_side="right",
         )
         # For this example, we force a pad_token_id if necessary.
-        tokenizer.pad_token_id = 128001
+        tokenizer.pad_token_id = 2
         original_vocab_size = len(tokenizer)
         print(f"Original tokenizer vocabulary size: {len(tokenizer)}")
 

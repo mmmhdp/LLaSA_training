@@ -11,7 +11,7 @@ import argparse
 def preprocess_dataset(
     dataset_name: str,
     output_dir: str,
-    tokenizer_name: str = "unsloth/Llama-3.2-1B-Instruct",
+    tokenizer_name: str = "HuggingFaceTB/SmolLM2-360M-Instruct",
     xcodec2_model_name: str = "HKUST-Audio/xcodec2",
     sample_rate: int = 16000,
     max_length: int = 2048,
@@ -50,7 +50,7 @@ def preprocess_dataset(
     new_speech_tokens = [f"<|s_{i}|>" for i in range(65536)]
     all_new_tokens = Start_End_tokens + new_speech_tokens
     num_added_tokens = tokenizer.add_tokens(all_new_tokens)
-    tokenizer.pad_token_id = 128001
+    tokenizer.pad_token_id = 2
     
     print(f"\nAdded {num_added_tokens} special tokens")
     print("New vocabulary size:", len(tokenizer))
@@ -85,7 +85,7 @@ def preprocess_dataset(
         all_sequences = []
         for idx, example in tqdm(enumerate(split_data), total=len(split_data)):
             # Process text
-            text = f"<|TEXT_UNDERSTANDING_START|>{example['text']}<|TEXT_UNDERSTANDING_END|>"
+            text = f"<|TEXT_UNDERSTANDING_START|>{example['transcript']}<|TEXT_UNDERSTANDING_END|>"
             text_ids = tokenizer.encode(text, add_special_tokens=False)
             
             # Process audio
@@ -123,7 +123,6 @@ def preprocess_dataset(
                 + speech_ids
                 + [tokenizer.pad_token_id] * (max_length - len(truncated_text) - len(speech_ids))
             )[:max_length]
-
             all_sequences.append(final_sequence)
 
         if all_sequences:  # Only save if we have sequences
@@ -149,7 +148,7 @@ if __name__ == "__main__":
     parser.add_argument('--output_dir', type=str, required=True,
                       help='Directory to save processed dataset')
     parser.add_argument('--tokenizer_name', type=str, 
-                      default="unsloth/Llama-3.2-1B-Instruct",
+                      default="HuggingFaceTB/SmolLM2-360M-Instruct",
                       help='Name or path of the tokenizer')
     parser.add_argument('--xcodec2_model_name', type=str,
                       default="HKUST-Audio/xcodec2",
