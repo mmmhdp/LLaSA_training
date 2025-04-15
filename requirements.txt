@@ -1,10 +1,10 @@
-torch 
+torch=2.5.0
 transformers 
 wandb
 datasets
 accelerate>=0.26.0
 deepspeed
-torchaudio
+torchaudio=2.5.0
 xcodec2==0.1.3
 bitsandbytes
 liger-kernel
