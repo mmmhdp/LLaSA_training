@@ -20,7 +20,8 @@ def preprocess_dataset(
 ):
     # Load dataset
     print("Loading dataset...")
-    dataset = load_dataset(dataset_name)
+    #dataset = load_dataset(dataset_name)
+    dataset = load_from_disk(dataset_name)
     
     # Get available splits
     splits = dataset.keys()
